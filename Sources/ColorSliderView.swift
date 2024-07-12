@@ -14,7 +14,9 @@ public struct ColorSliderView: UIViewRepresentable {
     }
 
     public func updateUIView(_ uiView: ColorSlider, context: Context) {
-        uiView.color = selectedColor
+        DispatchQueue.main.async {
+            uiView.color = self.selectedColor
+        }
     }
 
     public func makeCoordinator() -> Coordinator {
@@ -29,7 +31,9 @@ public struct ColorSliderView: UIViewRepresentable {
         }
 
         @objc public func colorChanged(_ slider: ColorSlider) {
-            parent.selectedColor = slider.color
+            DispatchQueue.main.async {
+                self.parent.selectedColor = slider.color
+            }
         }
     }
 }
